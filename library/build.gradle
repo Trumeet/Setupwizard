@@ -1,0 +1,9 @@
+/**
+ * Added by Trumeet@GitHub: We set standalone.gradle as default so 'Application' developer (Not platform developers) can use this library directly without set buildFileName.
+ *
+ * If you are building platform apps, you can include the following in your settings.gradle file:
+ *      include ':setup-wizard-lib'
+ *      project(':setup-wizard-lib').projectDir = new File(PATH_TO_THIS_DIRECTORY)
+ *      project(':setup-wizard-lib').buildFileName = 'build-orig.gradle'
+ */
+apply from: 'standalone.gradle'
