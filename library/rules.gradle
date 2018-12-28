@@ -11,41 +11,18 @@ apply plugin: 'com.android.library'
 
 android {
     publishNonDefault true
-
-    flavorDimensions 'compat'
-
-    productFlavors {
-        // DEPRECATED: Platform version that will not include the compatibility libraries
-        platformDeprecated {
-            dimension 'compat'
-            // TODO(yukl): Bump this file to v28 once we can properly test that
-            minSdkVersion 27
-        }
-
-        // Provides backwards compatibility for Gingerbread or above, using support libraries.
-        gingerbreadCompat {
-            dimension 'compat'
-            minSdkVersion 9
-        }
+    // Changed by Trumeet@GitHub: remove flavors because we don't need them
+    defaultConfig {
+        minSdkVersion 9
     }
-
     sourceSets {
         // Changed by Trumeet@GitHub: Change source sets to compile in Android Studio.
+        // Changed by Trumeet@GitHub: remove flavors because we don't need them
         main {
             // manifest.srcFile 'src/main/AndroidManifest.xml'
             // java.srcDirs = ['src/main/java']
-            resources.srcDirs = ['src/main']
-            res.srcDirs = ['src/main/res']
-        }
-
-        platformDeprecated {
-            // java.srcDirs = ['src/platform/java']
-            res.srcDirs = ['src/platform/res']
-        }
-
-        gingerbreadCompat {
-            // java.srcDirs = ['src/gingerbread/java', 'src/recyclerview/java']
-            res.srcDirs = ['src/gingerbread/res', 'src/recyclerview/res']
+            java.srcDirs = ['src/main/java', 'src/gingerbread/java', 'src/recyclerview/java']
+            res.srcDirs = ['src/main/res', 'src/gingerbread/res', 'src/recyclerview/res']
         }
     }
 }
@@ -69,8 +46,9 @@ dependencies {
     //
 
     // Changed by Trumeet@GitHub: change xxxCompile to xxxImplementation
-    platformDeprecatedImplementation deps['support-annotations']
+    // Changed by Trumeet@GitHub: remove flavors because we don't need them
+    implementation deps['support-annotations']
 
-    gingerbreadCompatImplementation deps['support-appcompat-v7']
-    gingerbreadCompatImplementation deps['support-recyclerview-v7']
+    implementation deps['support-appcompat-v7']
+    implementation deps['support-recyclerview-v7']
 }
