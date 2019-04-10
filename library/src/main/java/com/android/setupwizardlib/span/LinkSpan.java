@@ -146,7 +146,8 @@ public class LinkSpan extends ClickableSpan {
         drawState.setTypeface(TYPEFACE_MEDIUM);
     }
 
-    public String getId() {
+    // Modified by Trumeet@GitHub: avoid overriding the hidden "getId()" method
+    public String getIdValue() {
         return mId;
     }
 }
