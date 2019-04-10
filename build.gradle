@@ -27,7 +27,7 @@ task clean(type: Delete) {
 }
 
 // Inserted by Trumeet@GitHub: add version info
-def branch = 'git rev-parse --abbrev-ref HEAD'.execute([], project.rootDir).text.trim()
+def branch = 'android-9.0.0_r9' // Should be same with git branch
 def commit = 'git rev-list --count HEAD'.execute([], project.rootDir).text.trim()
 def ver = "$branch-$commit"
 
@@ -39,5 +39,6 @@ task exportVersion(type: Exec) {
     commandLine 'sh'
     doLast {
         file("$projectDir/version.txt").text = """$ver"""
+        file("$projectDir/branch.txt").text = """$branch"""
     }
 }

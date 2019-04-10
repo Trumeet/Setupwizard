@@ -8,6 +8,7 @@ before_install:
 - git clone https://github.com/Trumeet/Maven.git ./repo
 - "./gradlew exportVersion"
 - export VERSION=$(cat version.txt)
+- export BRA=$(cat branch.txt)
 script:
 - "./gradlew :library:uploadArchives :navigationbar:uploadArchives"
 deploy:
@@ -15,4 +16,4 @@ deploy:
   script: chmod +x ./deploy_repo.sh && ./deploy_repo.sh
   on:
     repo: Trumeet/Setupwizard
-    branch: android-9.0.0_r9
+    branch: $BRA
