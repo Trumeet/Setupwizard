@@ -29,14 +29,15 @@ task clean(type: Delete) {
 // Inserted by Trumeet@GitHub: add version info
 def branch = 'git rev-parse --abbrev-ref HEAD'.execute([], project.rootDir).text.trim()
 def commit = 'git rev-list --count HEAD'.execute([], project.rootDir).text.trim()
+def ver = "$branch-$commit"
 
 ext {
-    version = "$branch-$commit"
+    version = ver
 }
 
 task exportVersion(type: Exec) {
     commandLine 'sh'
     doLast {
-        file("$projectDir/version.txt").text = """$version"""
+        file("$projectDir/version.txt").text = """$ver"""
     }
 }
