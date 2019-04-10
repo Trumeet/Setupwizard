@@ -25,3 +25,18 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+// Inserted by Trumeet@GitHub: add version info
+def branch = 'git rev-parse --abbrev-ref HEAD'.execute([], project.rootDir).text.trim()
+def commit = 'git rev-list --count HEAD'.execute([], project.rootDir).text.trim()
+
+ext {
+    version = "$branch-$commit"
+}
+
+task exportVersion(type: Exec) {
+    commandLine 'sh'
+    doLast {
+        file("$projectDir/version.txt").text = """$version"""
+    }
+}

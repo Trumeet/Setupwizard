@@ -1,0 +1,30 @@
+jdk: oraclejdk8
+language: android
+android:
+  components:
+  - build-tools-28.0.3
+  - android-28
+before_install:
+- git clone https://github.com/Trumeet/Maven.git ./repo
+- "./gradlew exportVersion"
+- export VERSION=$(cat version.txt)
+script:
+- "./gradlew :library:uploadArchives :navigationbar:uploadArchives"
+before_deploy:
+- |
+  if ! [ "$BEFORE_DEPLOY_RUN" ]; then
+    export BEFORE_DEPLOY_RUN=1;
+    chmod +x ./deploy_repo.sh
+    git tag $VERSION
+  fi
+deploy:
+  provider: releases
+  name: $VERSION
+  prerelease: true
+  skip_cleanup: true
+  api_key:
+    secure: EPTcDz6R42ZFpqWWlqlfnBxHjji0hr6LNq2WZBiIJQ9L6BcOGH6bczCqw+I46Mcy8GR0PKMUmDwaUhn5+8tCZmOZGFTpgpaBILMmA23kLX+FRmRMoVN2Cj5azxkSeHy3hx3X1vpFrYYHYK8BPyl4fiWC/X4UngmugaTXgIa/MDy+aS1bLPHdIr05Q8n4dyEgk0F6D/+MCP7NPpZAtufZXw1U0juPac3nFS70ufOQijrD+teKvlVsNUn4NotOGsseRMx/nclBReYHjXUorCYJIxoOTJKVHPjilPP6nHdbnV6P9wRU9xeN+OQQNGwDcf/+eaZgVjpYD4jkFeJqRCoj+Xem5WqHyz6dHHQwMYh5ctBpPtWlYPY5ar3jrvDxCo81RAnhD8v73+BJP6yVd21JBXJqQPs027wICs1a3+mx6/Bv56si8M0VVVO4EK9IpT9YQhmjcCb9YB3o8njlZfqEHXLSDe4YWPW6c157pgfIggDfzBm33TLEBLsao5z3cD2oqnbxQyC9eU9COBkiY44dlGxRSVWKar22IFe/JN4tAjRLTVpg6HLtF9MFvDX0EbVuzt69sBI/dcxSTx0XUt0PbQ9thGj5nY5NTfvRFxKet6GXB1q7VNB+MdDdifS4RFa/pnuV44PfAZeMM2B9mleHUeJEIEnr2a/SZGPyYVAy+YA=
+  file: ''
+  on:
+    repo: Trumeet/Setupwizard
+    branch: android-9.0.0_r9

@@ -52,3 +52,15 @@ dependencies {
     implementation deps['support-appcompat-v7']
     implementation deps['support-recyclerview-v7']
 }
+
+// Inserted by Trumeet@GitHub: add maven publish
+apply plugin: 'maven'
+group = "moe.yuuta.setupwizard"
+version = rootProject.ext.version
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}

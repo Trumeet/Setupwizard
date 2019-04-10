@@ -24,3 +24,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+// Inserted by Trumeet@GitHub: add maven publish
+apply plugin: 'maven'
+group = "moe.yuuta.setupwizard"
+version = rootProject.ext.version
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}
