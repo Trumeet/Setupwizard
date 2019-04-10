@@ -22,3 +22,4 @@ deploy:
     script: ./deploy_repo.sh
     on:
       repo: Trumeet/Setupwizard
+      branch: android-9.0.0_r9
