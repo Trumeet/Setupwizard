@@ -18,13 +18,7 @@ before_deploy:
     git tag $VERSION
   fi
 deploy:
-  provider: releases
-  name: $VERSION
-  prerelease: true
-  skip_cleanup: true
-  api_key:
-    secure: Gl5AoRHvCDXiNEq30EkXUOWNQN968xAI/Pwx0VIlQiZs6oVLR4wOt517U5VVwrv9jyebJUqUsNBpSxeoiJBgIb8v9/Ps4OvzVmHwNbG2ym1Hleca0eECua3uW+LCtpj04oOEClQcO5jJrIJ8H4EjzkMZ369idm8oOAlgVIFG0204DSvXtlqUa9Thib8h8lDBSxtAtzhTceidN/ZrR5GtKCndekPATwT0NISM2EdzyPVBgHSVfWYQHWxj/XtwkoNQqtAGWRnZCs84TP1RexpOjZKbczeG7uWNKgTfclV/ksD48Gyzjx7+dLxDlAP2+sSB/5SROSakzLj5HmQE/5UYgeXOPhIAHGXGD4xpWEI8YUCZTObptmwuvS5O0fkCdzDE65VOYD3oVMASVu8gvmXqZXB2FPI1H0QB6ifTjar767eNlY/Gy1sA+fLECuo14ZEhNlcQ/8UWCEslZU2mrOOrADqowHdOpOJjYC98Z8MsiNx48xsW/e05u3x5oxj101qSzi308jsEqzwPMjnJ7jQbY5WQHe7/aremiBgg/KjTX9vH8AamHBOfOhh3KaFG/jOkSZqm1EoCplvpsuEzlYJrgYi6fHssjdURf5ORpE3DvekNoaqbGEZMgryeyXh2VOvbi9yERQrYmto2ccDDWsXSjLsbvMz+VJiQOclceQ0ok1o=
-  file: 'repo/moe/yuuta/setupwizard/library/maven-metadata.xml'
-  on:
-    repo: Trumeet/Setupwizard
-    branch: android-9.0.0_r9
+  - provider: script
+    script: ./deploy_repo.sh
+    on:
+      repo: Trumeet/Setupwizard
