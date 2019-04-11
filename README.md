@@ -6,7 +6,7 @@
 
 Our purpose is to publish it to maven so third-party app developers can use it easily. Everything I've modified is marked as:
 ```
-// Changed by Trumeet@GitHub: xxx (The description of the modification)
+// XXX by Trumeet@GitHub: xxx (The description of the modification)
 ```
 
 ## Main modifications
@@ -17,14 +17,25 @@ You can discover my changes by searching the comments.
 
 # How to use
 
-Just add it to your module:
+## 0x00 Add maven repo
+
+Follow the instructions in [maven.yuuta.dev](https://maven.yuuta.dev) to add the repo.
+
+## 0x01 Implement dependencies
+
 ```grooxy
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':library')
-    implementation project(':navigationbar')
+    def swVer = '9r9-15'
+    implementation "moe.yuuta.setupwizard:library:$swVer"
+    implementation "moe.yuuta.setupwizard:navigationbar:$swVer"
 }
 ```
+
+### A notice about version
+
+The version of libraries include the branch name and build number. For instance, version `9r9-10` means it is from branch `9r9` and is the 10th build.
+
+The branch name is the shorten form of AOSP branch name. `9r9` represents `android-9.0.0_r9`. Anyway, always check the latest version of library from [maven](https://github.com/Trumeet/Maven/tree/master/moe/yuuta/setupwizard/library).
 
 # Compatibility
 
